@@ -1,0 +1,2 @@
+- **getStaticProps === server side rendering**
+	- The content is loaded directly on the static files. This means that the content will be loaded instantly (+performance).
