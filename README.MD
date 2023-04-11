@@ -36,3 +36,24 @@ Execute the following commands in order:
 ></style>
 ></React.Fragment>
 >```
+
+### Dynamic routes
+- The component below is inside `pages/post`
+>```json
+>import { useRouter } from  "next/router";
+>export  default  function  Post() {
+>const  router  =  useRouter();
+>
+>return (
+>   <React.Fragment>
+>      <div>
+>      Slug na página é <b>{router.query.seuSlug}</b>
+>      </div>
+>   <Link  href={"/"}>Ir para home</Link>
+>   </React.Fragment>
+>   );
+>}
+>```
+
+### next/Link
+- **Only** the elements that were changed/updated are loaded in the page
