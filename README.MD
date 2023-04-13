@@ -52,7 +52,6 @@
 >      fallback: 'blocking'     // 'fallback === false' is on demand generation
 >   }
 >}
-
 >```
 ### npm export (Static site generation - SSG)
 - Used when all your pages are pre-rendered
