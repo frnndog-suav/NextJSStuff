@@ -2,6 +2,7 @@
 ## Observations 
 - Trailling slashes (next.config.js)
 - Google analytics
+- HtttpOnly: cookie storage that is not on browser (you can't access it by browser)
 
 
 ### Static
@@ -152,4 +153,20 @@ Execute the following commands in order:
 - Only works with `npm build && npm start` (runs only in server)
 - Fake api
 - Same folder/file structure from `page` folder
+
+## Studies
+
+### Access Token x Refresh Token
+**Access Token** 
+- get the user information
+- update user information
+- insert user information
+- delete user information
+- short life span
+
+**Refresh Token**
+- you don't need the user and the password to generate a new access token
+- long life span
+- it is associated (at backend level) to the user
+- you need to invalidate the old refresh tokens
 - 
