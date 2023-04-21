@@ -1,6 +1,7 @@
 import { Footer } from "../commons/Footer";
 import { Menu } from "../commons/Menu";
 import { SEOBlock } from "../commons/SEOBlock";
+import { PageFaqSectionRecord } from "../pag/PageFaqSectionRecord";
 import { PageHomeHeroSectionRecord } from "../pag/PageHomeHeroSectionRecord";
 
 export const cmsSection = {
@@ -10,4 +11,5 @@ export const cmsSection = {
   PageHomeHeroSectionRecord: (props) => (
     <PageHomeHeroSectionRecord {...props} />
   ),
+  PageFaqQuestionRecord: (props) => <PageFaqSectionRecord {...props} />,
 };

@@ -1,6 +1,6 @@
 import { Box, Button, Image, Text, theme } from "../../theme/components";
 
-export function PageHomeHeroSectionRecord() {
+export function PageHomeHeroSectionRecord(props) {
   return (
     <Box
       tag="main"
@@ -27,18 +27,17 @@ export function PageHomeHeroSectionRecord() {
       >
         {/* Title */}
         <Text tag="h1" variant="display1">
-          Mergulhe em Tecnologia!
+          {props.title}
         </Text>
 
         {/* Description */}
         <Text tag="p" variant="body1">
-          Você vai estudar, praticar, discutir e se aprofundar em uma plataforma
-          que respira tecnologia.
+          {props.description}
         </Text>
 
         {/* CTAText - CTALink */}
-        <Button href="/faq" colorVariant="neutral">
-          Principais dúvidas
+        <Button href={props.ctaLink} colorVariant="neutral">
+          {props.ctaText}
         </Button>
       </Box>
 
