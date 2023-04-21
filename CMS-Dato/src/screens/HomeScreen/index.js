@@ -25,12 +25,15 @@ export async function getStaticProps({ preview }) {
 function HomeScreen() {
   return (
     <>
+      {/* Common - SEO block */}
       <Head>
         <title>Home - Alura</title>
       </Head>
 
+      {/* Common - menu */}
       <Menu />
 
+      {/* Page home - Hero section */}
       <Box
         tag="main"
         styleSheet={{
@@ -54,13 +57,18 @@ function HomeScreen() {
             maxWidth: "450px",
           }}
         >
+          {/* Title */}
           <Text tag="h1" variant="display1">
             Mergulhe em Tecnologia!
           </Text>
+
+          {/* Description */}
           <Text tag="p" variant="body1">
             Você vai estudar, praticar, discutir e se aprofundar em uma
             plataforma que respira tecnologia.
           </Text>
+
+          {/* CTAText - CTALink */}
           <Button href="/faq" colorVariant="neutral">
             Principais dúvidas
           </Button>
