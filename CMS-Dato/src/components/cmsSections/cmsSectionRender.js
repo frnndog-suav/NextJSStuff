@@ -7,6 +7,8 @@ export function CmsSectionRender({ pageName }) {
   return sections.map((sectionProps) => {
     const Component = cmsSection[sectionProps.componentName];
 
+    if (!Component) return null;
+
     return <Component {...sectionProps} key={sectionProps.id} />;
   });
 }

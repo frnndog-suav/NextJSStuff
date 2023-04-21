@@ -1,7 +1,6 @@
 import { Box, Button, Image, Text, theme } from "../../theme/components";
 
-export function PageHomeHeroSectionRecord(props) {
-  console.log("PageHomeHeroSectionRecord", props);
+export function PageHomeHeroSectionRecord() {
   return (
     <Box
       tag="main"
