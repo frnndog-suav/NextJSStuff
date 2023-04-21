@@ -1,6 +1,9 @@
+import { getCmsContent } from "../../../service/cms/cmsContext";
 import { Box, Link, Text, theme } from "../../../theme/components";
 
-export function Footer({ description }) {
+export function Footer() {
+  const description = getCmsContent().globalContent?.globalFooter?.description;
+
   return (
     <Box
       tag="footer"
@@ -27,7 +30,9 @@ export function Footer({ description }) {
           &copy; {new Date().getFullYear()} {description}
         </Text>
         {process.env.NODE_ENV !== "production" && (
-          <Link href={"/api/preview?password=SENHASEGURA"}>Toogle preview mode</Link>
+          <Link href={"/api/preview?password=SENHASEGURA"}>
+            Toogle preview mode
+          </Link>
         )}
       </Box>
     </Box>
