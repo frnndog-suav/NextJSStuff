@@ -6,8 +6,11 @@ export function CmsSectionRender({ pageName }) {
 
   return sections.map((sectionProps) => {
     const Component = cmsSection[sectionProps.componentName];
+    const isVisible =
+      sectionProps.visible === true || sectionProps.visible === undefined;
 
     if (!Component) return null;
+    if (!isVisible) return null;
 
     return <Component {...sectionProps} key={sectionProps.id} />;
   });
