@@ -1,8 +1,6 @@
 import { Box, Image, Link, Text, theme } from "../../theme/components";
 
 export function PageFaqSectionRecord(props) {
-  console.log("PageFaqSectionRecord", props)
-  const categories = [];
   return (
     <Box
       tag="main"
