@@ -1,7 +1,206 @@
-import { Inter } from 'next/font/google'
-import Head from 'next/head'
+import { createStitches } from '@stitches/react';
+import Head from 'next/head';
 
-const inter = Inter({ subsets: ['latin'] })
+const { css } = createStitches({
+  theme: {
+    colors: {
+      myColorBase: '#2D7E85',
+      myColorVariant: '#C2E7EA'
+    },
+    space: {
+      space1: '8px',
+      space2: '16px',
+      space3: '24px',
+      space4: '32px',
+      space10: '500px'
+    },
+    size: {
+      1: '8px',
+      2: '16px',
+      3: '24px',
+      4: '32px'
+    },
+    radii: {
+      round: '9999px'
+    },
+    fontSizes: {
+      1: '8px',
+      2: '16px',
+      3: '24px',
+      4: '32px'
+    },
+  },
+  utils: {
+    customYPadding: (value: string) => ({
+      paddingTop: value,
+      paddingBottom: value
+    })
+  }
+})
+
+const body = css({
+  display: 'flex',
+  flexDirection: 'column',
+  padding: 40,
+  gap: 34,
+})
+
+const YELLOW = 'yellow'
+const GREEN = 'green'
+
+enum BUTTON_STYLE {
+  Blue = 'blue',
+  Orange = 'orange'
+}
+
+const basicButton = css({
+  appearance: 'none',
+  backgroundColor: '#F16A6A',
+  border: 'none',
+  borderRadius: '$round',
+  height: 25,
+  fontSize: 13,
+  '&:hover': {
+    backgroundColor: "#DC1414",
+    cursor: 'pointer'
+  }
+})
+
+const buttonStyle = css({
+  appearance: 'none',
+  border: 'none',
+  borderRadius: '999px',
+  height: 25,
+  fontSize: '$3',
+  '&:hover': {
+    cursor: 'pointer'
+  },
+  variants: {
+    variant: {
+      gray: {
+        backgroundColor: 'gainsboro',
+        '&:hover': {
+          backgroundColor: "LightGray",
+        }
+      },
+      [YELLOW]: {
+        backgroundColor: '#FFDB70',
+        '&:hover': {
+          backgroundColor: "#FFC20D",
+        },
+      },
+      [GREEN]: {
+        backgroundColor: '#49AB4E',
+        '&:hover': {
+          backgroundColor: "#1D441F",
+        }
+      },
+      'myCustomColors': {
+        backgroundColor: '$myColorBase',
+        '&:hover': {
+          backgroundColor: "$myColorVariant",
+        }
+      }
+    },
+    outlined: {
+      true: {
+        border: '1px solid black'
+      }
+    },
+  },
+  defaultVariants: {
+    variant: 'gray'
+  }
+})
+
+const typedButtonStyle = css({
+  appearance: 'none',
+  border: 'none',
+  borderRadius: '999px',
+  height: 25,
+  fontSize: 13,
+  '&:hover': {
+    cursor: 'pointer'
+  },
+  variants: {
+    variant: {
+      [BUTTON_STYLE.Blue]: {
+        backgroundColor: '#007BFF',
+        '&:hover': {
+          backgroundColor: "#85C0FF",
+        }
+      }
+    },
+    outlined: {
+      true: {
+        border: '1px solid black'
+      }
+    },
+  },
+  defaultVariants: {
+    variant: 'gray'
+  },
+  compoundVariants: [{
+    variant: BUTTON_STYLE.Blue,
+    css: {
+      '&:hover': {
+        color: 'White'
+      }
+    }
+  }]
+})
+
+const compoundVariantButton = css({
+  appearance: 'none',
+  border: 'none',
+  borderRadius: '999px',
+  height: 25,
+  fontSize: 13,
+  customYPadding: '100px',
+  '&:hover': {
+    cursor: 'pointer'
+  },
+  variants: {
+    variant: {
+      [BUTTON_STYLE.Orange]: {
+        backgroundColor: '#FFE6D6',
+        '&:hover': {
+          backgroundColor: "#EE5B00",
+        }
+      }
+    },
+    outlined: {
+      true: {
+        border: '1px solid black'
+      }
+    }
+  },
+  compoundVariants: [
+    {
+      variant: BUTTON_STYLE.Orange,
+      outlined: true,
+      css: {
+        borderColor: '#8C3600'
+      }
+    }
+  ]
+})
+
+const sizeButton = css({
+  variants: {
+    customSize: {
+      1: {
+        height: 30,
+      },
+      2: {
+        height: 40,
+        backgroundColor: 'BlueViolet'
+      }
+    }
+  }
+})
+
+const generic = css({})
 
 export default function Home() {
   return (
@@ -13,7 +212,39 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <button>Teste</button>
+      <div className={body()}>
+        <button className={basicButton()}>basicButton</button>
+        <button className={buttonStyle()}>default</button>
+        <button className={buttonStyle({ variant: 'yellow' })}>button yellow variant</button>
+        <button className={buttonStyle({ variant: GREEN })}>button GREEN variant</button>
+        <button className={buttonStyle({ outlined: true })}>outlined</button>
+        <button className={buttonStyle({ variant: 'myCustomColors' })}>myCustomColors</button>
+        <button className={typedButtonStyle({ variant: BUTTON_STYLE.Blue })}>BUTTON_STYLE enum</button>
+        <button className={typedButtonStyle({ variant: BUTTON_STYLE.Blue, outlined: true })}>BUTTON_STYLE outlined</button>
+        <button className={compoundVariantButton({ variant: BUTTON_STYLE.Orange, outlined: true })}>compoundVariantButton</button>
+      </div>
+
+      <hr />
+      <div className={body()}>
+        <button className={sizeButton({ customSize: 1 })}>size button</button>
+        <button className={sizeButton({
+          customSize: {
+            "@initial": '1',
+            "@media (min-width: 1200px)": '2'
+          }
+        })}>responsive size button - change view width</button>
+      </div>
+
+      <hr />
+
+      <div className={generic({
+        css: {
+          marginTop: '$space10',
+          border: '1px solid black',
+          backgroundColor: '$myColorBase'
+        }
+      })}>css inline genérico</div>
+
 
     </>
   )
