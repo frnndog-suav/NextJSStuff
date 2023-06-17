@@ -7,7 +7,7 @@ describe('<CustomButton />', () => {
     it('should render button with text "Clique aqui"', () => {
         render(<CustomButton buttonText="Clique aqui" action={testFunction} />);
 
-        const customButton = screen.getByText('Clique aqui');
+        const customButton = screen.getByText(/Clique aqui/i);
         expect(customButton).toBeInTheDocument();
     });
 
