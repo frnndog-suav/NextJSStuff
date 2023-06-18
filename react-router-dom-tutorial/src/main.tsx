@@ -8,14 +8,31 @@ import { Contact } from "./routes/Contact.tsx";
 
 //1 - Configurando router
 
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <Home />,
+//   },
+//   {
+//     path: "/contact",
+//     element: <Contact />,
+//   },
+// ]);
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
   },
 ]);
 
