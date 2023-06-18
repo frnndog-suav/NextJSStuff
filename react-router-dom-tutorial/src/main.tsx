@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./routes/Home.tsx";
 import { Contact } from "./routes/Contact.tsx";
 import { ErrorPage } from "./routes/ErrorPage.tsx";
+import { ContactDetails } from "./routes/ContactDetails.tsx";
 
 //1 - Configurando router
 
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      //5 - nested routes - identificador único (dynamic routes)
+      {
+        path: '/contact/:nomeDaVariavel',
+        element: <ContactDetails />
+      }
     ],
   },
 ]);
