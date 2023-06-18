@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import { Home } from "./routes/Home.tsx";
 import { Contact } from "./routes/Contact.tsx";
 import { ErrorPage } from "./routes/ErrorPage.tsx";
@@ -40,6 +40,11 @@ const router = createBrowserRouter([
       {
         path: '/contact/:nomeDaVariavel',
         element: <ContactDetails />
+      },
+      //7 - navegar para paginas que não existem
+      {
+        path: '/oldPage',
+        element: <Navigate to="/contact" />
       }
     ],
   },
