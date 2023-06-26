@@ -8,7 +8,7 @@ const LoginPage = () => {
   const password = useRef("");
 
   const onSubmit = async () => {
-    const result = await signIn("credentials", {
+    await signIn("credentials", {
       username: username.current,
       password: password.current,
       redirect: true,

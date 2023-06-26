@@ -29,7 +29,7 @@ const handler = NextAuth({
 
         const user = await res.json();
 
-        if (user) {
+        if (res.ok && user) {
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {
@@ -42,8 +42,9 @@ const handler = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/auth/signIn"
-  }
+    signIn: "/auth/signIn",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };
