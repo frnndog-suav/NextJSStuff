@@ -5,6 +5,7 @@ import useRegisterModal from "@/hooks/useRegisterModal/useRegisterModal";
 import axios from "axios";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import Heading from "../Heading/Heading";
 import Modal from "../Modal/Modal";
 
@@ -32,7 +33,7 @@ const RegisterModal = () => {
       .then(() => {
         registerModal.onClose();
       })
-      .catch((error) => console.log(error))
+      .catch(() => toast.error("Something went wrong!"))
       .finally(() => setIsLoading(false));
   };
 
@@ -42,6 +43,23 @@ const RegisterModal = () => {
       <Input
         id="email"
         label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="name"
+        label="Name"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="password"
+        label="Password"
+        type="password"
         disabled={isLoading}
         register={register}
         errors={errors}
