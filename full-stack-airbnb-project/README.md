@@ -15,3 +15,4 @@
   >```
 4. Create an account at [MongoDB](https://www.mongodb.com/atlas/database)
 5. [Watch this video](https://www.youtube.com/watch?v=c_-b_isI4vg&t=1790s) to create a database (1:32:20 to 1:40:15)
+3:08:20
