@@ -5,7 +5,7 @@ import Logo from "./Logo/Logo";
 import Search from "./Search/Search";
 import UserMenu from "./UserMenu/UserMenu";
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -19,4 +19,6 @@ export default function Navbar() {
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;

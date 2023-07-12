@@ -1,10 +1,11 @@
+import LoginModal from "@/components/Modals/LoginModal/LoginModal";
 import RegisterModal from "@/components/Modals/RegisterModal/RegisterModal";
 import Navbar from "@/components/Navbar/Navbar";
+import NextAuthSessionProvider from "@/providers/SessionProvider";
+import ToasterProvider from "@/providers/ToasterProvider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
-import ToasterProvider from "@/providers/ToasterProvider";
-import LoginModal from "@/components/Modals/LoginModal/LoginModal";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -22,10 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={nunito.className}>
         <ToasterProvider />
-        <Navbar />
-        <RegisterModal />
-        <LoginModal />
-        {children}
+        <NextAuthSessionProvider>
+          <Navbar />
+          <RegisterModal />
+          <LoginModal />
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html>
   );
