@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "../Container/Container";
+import Categories from "./Categories/Categories";
 import Logo from "./Logo/Logo";
 import Search from "./Search/Search";
 import UserMenu from "./UserMenu/UserMenu";
@@ -17,6 +18,7 @@ const Navbar = () => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };
