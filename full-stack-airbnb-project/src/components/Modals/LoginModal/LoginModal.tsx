@@ -4,9 +4,8 @@ import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import useLoginModal from "@/hooks/useLoginModal/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal/useRegisterModal";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
@@ -18,7 +17,7 @@ const LoginModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const { data: session } = useSession();
 
   const {
     register,
@@ -31,7 +30,7 @@ const LoginModal = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
     signIn("credentials", {
@@ -41,7 +40,7 @@ const LoginModal = () => {
       setIsLoading(false);
       if (callback?.ok) {
         toast.success("Logged in");
-        router.refresh();
+        // router.refresh();
         loginModal.onClose();
       }
 
@@ -50,6 +49,11 @@ const LoginModal = () => {
       }
     });
   };
+
+  const toggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -91,11 +95,11 @@ const LoginModal = () => {
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex items-center gap-2">
-          <div>Already have an account?</div>
+          <div>First time using Airbnb?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={toggle}
             className="text-neutral-800 cursor-pointer hover:underline">
-            Log in
+            Create an account
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import ToasterProvider from "@/providers/ToasterProvider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import RentModal from "@/components/Modals/RentModal/RentModal";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Navbar />
           <RegisterModal />
           <LoginModal />
+          <RentModal />
           {children}
         </NextAuthSessionProvider>
       </body>
