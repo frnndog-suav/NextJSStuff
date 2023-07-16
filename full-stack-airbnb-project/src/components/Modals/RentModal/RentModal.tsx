@@ -1,15 +1,16 @@
 "use client";
 
 import CategoryInput from "@/components/Input/CategoryInput/CategoryInput";
+import Counter from "@/components/Input/Counter/Counter";
 import CountrySelect from "@/components/Input/CountrySelect/CountrySelect";
+import ImageUpload from "@/components/Input/ImageUpload/ImageUpload";
 import { categories } from "@/components/Navbar/Categories/Categories";
 import useRentModal from "@/hooks/useRentModal/useRentModal";
+import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import Heading from "../Heading/Heading";
 import Modal from "../Modal/Modal";
-import dynamic from "next/dynamic";
-import Counter from "@/components/Input/Counter/Counter";
 
 export enum Step {
   Category = 0,
@@ -51,6 +52,7 @@ const RentModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
+  const imageSrc = watch("imageSrc");
 
   const Map = useMemo(
     () =>
@@ -154,6 +156,21 @@ const RentModal = () => {
           subtitle="How many bathrooms do you have?"
           value={bathroomCount}
           onChange={(value) => setCustomValue("bathroomCount", value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === Step.Images) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subtitle="Show guests what your place looks like!"
+        />
+        <ImageUpload
+          onChange={(value) => setCustomValue("imageSrc", value)}
+          value={imageSrc}
         />
       </div>
     );
