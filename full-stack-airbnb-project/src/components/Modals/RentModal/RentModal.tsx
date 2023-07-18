@@ -7,14 +7,14 @@ import ImageUpload from "@/components/Input/ImageUpload/ImageUpload";
 import Input from "@/components/Input/Input";
 import { categories } from "@/components/Navbar/Categories/Categories";
 import useRentModal from "@/hooks/useRentModal/useRentModal";
+import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import Heading from "../Heading/Heading";
 import Modal from "../Modal/Modal";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 export enum Step {
   Category = 0,
@@ -90,7 +90,7 @@ const RentModal = () => {
     setIsLoading(true);
 
     axios
-      .post("/api/listings", { data })
+      .post("/api/listing", data)
       .then(() => {
         toast.success("Listing created!");
         router.refresh();
@@ -98,8 +98,9 @@ const RentModal = () => {
         setStep(Step.Category);
         rentModal.onClose();
       })
-      .catch(() => {
+      .catch((error) => {
         toast.error("Something went wrong!");
+        console.log("Error", error);
       })
       .finally(() => {
         setIsLoading(false);
