@@ -33,7 +33,6 @@ const ListingInfo: FC<ListingInfoProps> = ({
   user,
 }) => {
   const { getByValue } = useCountries();
-  const coordinates = getByValue(locationValue)?.latlng;
 
   return (
     <div className="col-span-4 flex flex-col gap-8">
@@ -56,6 +55,9 @@ const ListingInfo: FC<ListingInfoProps> = ({
           description={category.description}
         />
       )}
+      <hr />
+      <div className="text-lg font-light text-neutral-500">{description}</div>
+      <hr />
     </div>
   );
 };
