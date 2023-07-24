@@ -141,7 +141,7 @@ const ListingClient: FC<ListingClientProps> = ({
                 dateRange={dateRange}
                 onSubmit={onCreateReservation}
                 disabled={isLoading}
-                disabledDates={disableDates}
+                disableDates={disableDates}
               />
             </div>
           </div>
