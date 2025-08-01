@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ActiveLink } from "../active-link";
+import { Logo } from "../logo";
 import { Button } from "../ui/button";
 
 export function Header() {
@@ -35,7 +36,7 @@ export function Header() {
           justify-between 
           w-full"
         >
-          <Link href="/">Logo</Link>
+          <Logo />
           <nav className="flex items-center gap-6">
             <ActiveLink href={"/"}>Início</ActiveLink>
             <ActiveLink href={"/blog"}>Blog</ActiveLink>
