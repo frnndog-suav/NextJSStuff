@@ -8,17 +8,14 @@ type TActiveLinkProps = LinkProps & {
 
 export function ActiveLink({ children, href, ...rest }: TActiveLinkProps) {
   const router = useRouter();
-  const isCurrentPath =
-    router.asPath === href ||
-    router.pathname === rest.as ||
-    router.asPath.startsWith(String(rest.as));
+  const isCurrentPath = router.asPath === href || router.pathname === rest.as;
 
   return (
     <Link
       href={href}
       className={cn(
-        "text-sm font-medium transition-colors hover:text-blue-500",
-        isCurrentPath ? "text-blue-500" : "text-muted-foreground"
+        "text-action-sm font-medium transition-colors hover:text-blue-500",
+        isCurrentPath ? "text-blue-200" : "text-gray-100"
       )}
     >
       {children}
