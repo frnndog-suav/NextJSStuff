@@ -1,6 +1,6 @@
 import { Search } from "@/src/components/search";
 import { useRouter } from "next/router";
-import { PostCard } from "./components";
+import { PostCard, PostGrid } from "./components";
 
 export default function BlogList() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function BlogList() {
         flex-grow 
         h-full"
     >
-      <header>
+      <header className="pb-14">
         <div className="container space-y-6 flex flex-col items-start justify-between md:flex-row md:items-end lg:items-end">
           <div className="flex flex-col gap-4 px-4 md:px-0">
             <span
@@ -50,17 +50,63 @@ export default function BlogList() {
         </div>
       </header>
 
-      <PostCard
-        title="Transformando seu negócio em uma loja virtual"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
-        date="05/11/2025"
-        image="/assets/study.jpg"
-        slug="/transformando"
-        author={{
-          name: "João Maria",
-          avatar: "/avatar1.jpg",
-        }}
-      />
+      <PostGrid>
+        <PostCard
+          title="Transformando seu negócio em uma loja virtual"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
+          date="05/11/2025"
+          image="/assets/study.jpg"
+          slug="/transformando"
+          author={{
+            name: "João Maria",
+            avatar: "/avatar1.jpg",
+          }}
+        />
+        <PostCard
+          title="Transformando seu negócio em uma loja virtual"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
+          date="05/11/2025"
+          image="/assets/study.jpg"
+          slug="/transformando"
+          author={{
+            name: "João Maria",
+            avatar: "/avatar1.jpg",
+          }}
+        />
+        <PostCard
+          title="Transformando seu negócio em uma loja virtual"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
+          date="05/11/2025"
+          image="/assets/study.jpg"
+          slug="/transformando"
+          author={{
+            name: "João Maria",
+            avatar: "/avatar1.jpg",
+          }}
+        />
+        <PostCard
+          title="Transformando seu negócio em uma loja virtual"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
+          date="05/11/2025"
+          image="/assets/study.jpg"
+          slug="/transformando"
+          author={{
+            name: "João Maria",
+            avatar: "/avatar1.jpg",
+          }}
+        />
+        <PostCard
+          title="Transformando seu negócio em uma loja virtual"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
+          date="05/11/2025"
+          image="/assets/study.jpg"
+          slug="/transformando"
+          author={{
+            name: "João Maria",
+            avatar: "/avatar1.jpg",
+          }}
+        />
+      </PostGrid>
     </div>
   );
 }
