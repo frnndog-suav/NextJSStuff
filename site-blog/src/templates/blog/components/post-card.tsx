@@ -1,14 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function PostCard() {
+type TAuthor = {
+  name: string;
+  avatar: string;
+};
+
+type TProps = {
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  author: TAuthor;
+};
+
+export function PostCard({
+  author,
+  date,
+  description,
+  image,
+  slug,
+  title,
+}: TProps) {
   return (
     <Link
-      href={"/blog/"}
+      href={`/blog/${slug}`}
       className="
       w-full 
       max-w-2xl 
-      rounded-t-3xl 
+      rounded-t-[12px] 
       border-[1px] 
       border-gray-400 
       bg-gray-600 
@@ -23,26 +44,26 @@ export function PostCard() {
       <div className="p-2 rounded-md overflow-hidden">
         {/* image container */}
         <div className="relative">
-          <div className="absolute top-0 right-0 px-3 py-1">
-            <span className="text-gray-300 text-body-xs">05/11/2025</span>
+          <div className="absolute top-0 right-0 px-3 py-1 bg-gray-600 backdrop-blur-sm rounded-bl-[10px]">
+            <span className="text-gray-300 text-body-xs">{date}</span>
           </div>
           <Image
-            src={"/assets/study.jpg"}
+            src={image}
             alt=""
             width={288}
             height={144}
-            className="w-full h-40 object-cover object-center"
+            className="w-full h-40 object-cover object-center rounded-t-[8px]"
           />
         </div>
 
         {/* post info */}
         <div className="px-2 mt-4 space-y-4">
           <h2 className="text-heading-sm text-gray-100 line-clamp-3">
-            {"tese testet e set etsetsetets e tse setetse "}
+            {title}
           </h2>
 
           <p className="text-gray-300 text-body-sm line-clamp-3">
-            {"Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}
+            {description}
           </p>
 
           {/* post footer */}
@@ -58,14 +79,14 @@ export function PostCard() {
                 rounded-full border-blue-200 border-[1px]"
             >
               <Image
-                src={"/avatar1.jpg"}
+                src={author.avatar}
                 alt=""
                 fill
                 className="object-cover rounded-md"
               />
             </div>
 
-            <span className="text-body-sm text-gray-300">João Maria</span>
+            <span className="text-body-sm text-gray-300">{author.name}</span>
           </div>
         </div>
       </div>

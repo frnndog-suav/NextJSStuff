@@ -50,7 +50,17 @@ export default function BlogList() {
         </div>
       </header>
 
-      <PostCard />
+      <PostCard
+        title="Transformando seu negócio em uma loja virtual"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia congue est. Etiam sagittis blandit odio a ornare. Aenean vel nunc in diam dignissim auctor sit amet vitae lorem."
+        date="05/11/2025"
+        image="/assets/study.jpg"
+        slug="/transformando"
+        author={{
+          name: "João Maria",
+          avatar: "/avatar1.jpg",
+        }}
+      />
     </div>
   );
 }
