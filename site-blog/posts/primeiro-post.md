@@ -1,8 +1,11 @@
 ---
 title: Mauris libero ante, facilisis eu nisi eu, porttitor hendrerit odio
-description: Nunc ullamcorper ligula quis dolor tincidunt rhoncus. In sed magna a tellus commodo iaculis. Proin iaculis nunc ac dolor scelerisque, at luctus turpis vehicula. In semper vehicula eleifend. Proin pellentesque purus ligula, ut vulputate justo fringilla et. 
+description: Nunc ullamcorper ligula quis dolor tincidunt rhoncus. In sed magna a tellus commodo iaculis. Proin iaculis nunc ac dolor scelerisque, at luctus turpis vehicula. In semper vehicula eleifend. Proin pellentesque purus ligula, ut vulputate justo fringilla et.
 date: 2025-11-05 10:20:00
 image: /assets/primeiro-post.jpg
+author:
+  name: Alberto Aberto
+  avatar: /avatar1.jpg
 ---
 
 Fusce aliquam at velit sed fringilla. Mauris auctor tincidunt turpis, id tincidunt massa interdum ut. Quisque ut lorem mattis, luctus risus vel, lacinia metus. Vestibulum condimentum libero nec justo pellentesque, vel aliquet mi consectetur. Nunc sed consectetur justo. Morbi tincidunt purus leo, non fermentum turpis malesuada eu.
