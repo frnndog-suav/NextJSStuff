@@ -1,3 +1,5 @@
+import { Search } from "@/src/components/search";
+
 export default function BlogPage() {
   return (
     <div
@@ -36,6 +38,7 @@ export default function BlogPage() {
               Nam eget ante fermentum, ornare ligula nec, consectetur magna.
             </h1>
           </div>
+          <Search />
         </div>
       </header>
     </div>
