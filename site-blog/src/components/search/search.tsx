@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
-import { SearchIcon } from "lucide-react";
+import { CircleX, SearchIcon } from "lucide-react";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 
 export function Search() {
   const router = useRouter();
-  const query = router.query.q as string;
+  const query = (router.query.q as string) ?? "";
 
   const handleSearch = useCallback(
     (event: React.FormEvent) => {
@@ -27,8 +27,15 @@ export function Search() {
     });
   }
 
+  function resetSearch() {
+    router.push("/blog", undefined, {
+      shallow: true,
+      scroll: false,
+    });
+  }
+
   return (
-    <form onSubmit={handleSearch} className="relative group">
+    <form onSubmit={handleSearch} className="relative group w-full md:w-60">
       <SearchIcon
         className={cn(
           "text-gray-300 absolute left-3 top-1/2 h-4 w-4 transition-colors duration-200 -translate-y-1/2 group-focus-within:text-blue-300",
@@ -38,9 +45,11 @@ export function Search() {
       <input
         type="text"
         placeholder="Buscar"
+        value={query}
         className="
+        w-full 
         h-10 
-        w-72 
+        md:w-60 
         bg-transparent 
         border 
         border-gray-400 
@@ -58,6 +67,13 @@ export function Search() {
         placeholder:text-body-sm"
         onChange={handleQueryChange}
       />
+
+      {query && (
+        <CircleX
+          onClick={resetSearch}
+          className="text-green-300 absolute w-4 h-4 top-1/2 -translate-y-1/2 right-3 cursor-pointer"
+        />
+      )}
     </form>
   );
 }
