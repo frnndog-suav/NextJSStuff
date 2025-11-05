@@ -2,6 +2,8 @@
 
 import { LandingPage } from "../templates/landing-page";
 
+import { allPosts } from ".contentlayer/generated";
+
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
 //   subsets: ['latin'],
@@ -21,5 +23,7 @@ import { LandingPage } from "../templates/landing-page";
 // }
 
 export default function Home() {
+  console.log(allPosts);
+
   return <LandingPage />;
 }
