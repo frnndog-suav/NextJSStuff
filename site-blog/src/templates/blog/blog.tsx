@@ -1,22 +1,26 @@
-import { allPosts } from "@/.contentlayer/generated";
+import { Post } from "@/.contentlayer/generated";
 import { Search } from "@/src/components/search";
 import { Inbox } from "lucide-react";
 import { useRouter } from "next/router";
 import { PostCard, PostGrid } from "./components";
 
-export default function BlogList() {
+export type TBlogListProps = {
+  posts: Post[];
+};
+
+export default function BlogList({ posts }: TBlogListProps) {
   const router = useRouter();
   const query = (router.query.q as string) ?? "";
   const pageTitle = query
     ? `Resultados de busca para "${query}"`
     : "Nam eget ante fermentum, ornare ligula nec, consectetur magna.";
 
-  const posts = query
-    ? allPosts.filter((post) =>
+  const postsList = query
+    ? posts.filter((post) =>
         post.title.toLowerCase().includes(query.toLowerCase())
       )
-    : allPosts;
-  const hasPosts = posts.length > 0;
+    : posts;
+  const hasPosts = postsList.length > 0;
 
   return (
     <div
@@ -61,7 +65,7 @@ export default function BlogList() {
 
       {hasPosts && (
         <PostGrid>
-          {posts.map((post) => {
+          {postsList.map((post) => {
             return (
               <PostCard
                 key={post._id}
