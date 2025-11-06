@@ -74,7 +74,11 @@ export default function PostPage() {
 
               <div className="space-y-3">
                 {[{ key: 1, name: "teste" }].map((provider) => (
-                  <Button key={provider.key} variant="outline">
+                  <Button
+                    key={provider.key}
+                    variant="outline"
+                    className="w-full justify-start gap-2"
+                  >
                     {provider.name}
                   </Button>
                 ))}
