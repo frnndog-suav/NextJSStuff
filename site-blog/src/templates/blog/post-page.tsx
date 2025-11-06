@@ -1,21 +1,18 @@
-import { allPosts } from "@/.contentlayer/generated";
+import { Post } from "@/.contentlayer/generated";
 import { Avatar } from "@/src/components/avatar";
 import { Markdown } from "@/src/components/markdown";
 import { Button } from "@/src/components/ui/button";
 import { useShare } from "@/src/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-export function PostPage() {
-  const router = useRouter();
-  const slug = router.query.slug as string;
-  const post = allPosts.find(
-    (post) => post.slug.toLowerCase() === slug?.toLowerCase()
-  );
+export type TPostPageProps = {
+  post: Post;
+};
 
+export function PostPage({ post }: TPostPageProps) {
   const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR");
-  const postUrl = "https://site.set/blog/" + slug;
+  const postUrl = "https://site.set/blog/" + post?.slug;
 
   const { shareButtons } = useShare({
     url: postUrl,
