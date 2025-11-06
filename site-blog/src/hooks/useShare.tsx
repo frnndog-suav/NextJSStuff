@@ -1,4 +1,4 @@
-import { Link2 } from "lucide-react";
+import { Link } from "lucide-react";
 import { useCallback, useMemo } from "react";
 import { useClipboard } from ".";
 import {
@@ -65,7 +65,7 @@ export function useShare({ url, title, text, clipboardTimeout }: TProps) {
       {
         provider: "clipboard",
         name: isCopied ? "Link copiado!" : "Copiar link",
-        icon: <Link2 className="h-4 w-4" />,
+        icon: <Link className="h-4 w-4" />,
         action: () => share("clipboard"),
       },
     ],
