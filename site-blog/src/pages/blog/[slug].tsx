@@ -8,7 +8,7 @@ export default function PostPage() {
   const router = useRouter();
   const slug = router.query.slug as string;
   const post = allPosts.find(
-    (post) => post.slug.toLowerCase() === slug.toLowerCase()
+    (post) => post.slug.toLowerCase() === slug?.toLowerCase()
   );
 
   const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR");
@@ -28,8 +28,8 @@ export default function PostPage() {
           <figure className="relative aspect-[16/10] w-full overflow-hidden rounded-lg">
             <Image
               fill
-              src={post?.image ?? ""}
-              alt={post?.title ?? ""}
+              src={post?.image ?? "/default.jpg"}
+              alt={post?.title ?? "/default.jpg"}
               className="object-cover"
             />
           </figure>
@@ -41,9 +41,14 @@ export default function PostPage() {
 
             <Avatar.Container>
               <Avatar.Image
-                src={post?.author.avatar ?? ""}
                 alt={post?.title ?? ""}
+                src={
+                  post?.author.avatar
+                    ? `/${post?.author.avatar.trim()}`
+                    : "/default.jpg"
+                }
               />
+
               <Avatar.Content>
                 <Avatar.Title>{post?.author.name}</Avatar.Title>
                 <Avatar.Description>

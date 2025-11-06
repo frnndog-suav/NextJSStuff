@@ -79,7 +79,7 @@ export function PostCard({
                 rounded-full border-blue-200 border-[1px]"
             >
               <Image
-                src={author.avatar}
+                src={'/' + author.avatar}              
                 alt=""
                 fill
                 className="object-cover rounded-md"
