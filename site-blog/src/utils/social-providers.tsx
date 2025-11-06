@@ -1,5 +1,7 @@
 import { Facebook, Linkedin, Slack } from "lucide-react";
 
+export type TSocialProvider = "linkedin" | "facebook" | "slack";
+
 export type TShareConfig = {
   url: string;
   text?: string;
