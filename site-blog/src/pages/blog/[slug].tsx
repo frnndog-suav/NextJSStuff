@@ -1,6 +1,7 @@
 import { allPosts } from "@/.contentlayer/generated";
 import { Avatar } from "@/src/components/avatar";
 import { Markdown } from "@/src/components/markdown";
+import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -64,6 +65,22 @@ export default function PostPage() {
               <Markdown content={post?.body.raw ?? ""} />
             </div>
           </article>
+
+          <aside className="space-y-6">
+            <div className="rounded-lg bg-gray-700 p-4 md:p-6">
+              <h2 className="mb-4 text-heading-xs text-gray-100">
+                Compartilhar
+              </h2>
+
+              <div className="space-y-3">
+                {[{ key: 1, name: "teste" }].map((provider) => (
+                  <Button key={provider.key} variant="outline">
+                    {provider.name}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </main>
