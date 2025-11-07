@@ -1,7 +1,9 @@
+'use client'
+
 import { Post } from "@/.contentlayer/generated";
 import { Search } from "@/src/components/search";
 import { Inbox } from "lucide-react";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { PostCard, PostGrid } from "./components";
 
 export type TBlogListProps = {
@@ -9,8 +11,11 @@ export type TBlogListProps = {
 };
 
 export default function BlogList({ posts }: TBlogListProps) {
-  const router = useRouter();
-  const query = (router.query.q as string) ?? "";
+  // const router = useRouter();
+  // const query = (router.query.q as string) ?? "";
+  const searchParams = useSearchParams();
+  const query = searchParams?.get("q") || "";
+
   const pageTitle = query
     ? `Resultados de busca para "${query}"`
     : "Nam eget ante fermentum, ornare ligula nec, consectetur magna.";
