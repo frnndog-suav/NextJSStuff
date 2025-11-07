@@ -1,10 +1,9 @@
 import { Post } from "@/.contentlayer/generated";
 import { Avatar } from "@/src/components/avatar";
 import { Markdown } from "@/src/components/markdown";
-import { Button } from "@/src/components/ui/button";
-import { useShare } from "@/src/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { PostShare } from "./components";
 
 export type TPostPageProps = {
   post: Post;
@@ -13,12 +12,6 @@ export type TPostPageProps = {
 export function PostPage({ post }: TPostPageProps) {
   const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR");
   const postUrl = "https://site.set/blog/" + post?.slug;
-
-  const { shareButtons } = useShare({
-    url: postUrl,
-    title: post?.title,
-    text: post?.description,
-  });
 
   return (
     <main className="py-20 text-gray-100">
@@ -71,27 +64,11 @@ export function PostPage({ post }: TPostPageProps) {
             </div>
           </article>
 
-          <aside className="space-y-6">
-            <div className="rounded-lg bg-gray-700 px-4 md:p-6">
-              <h2 className="hidden md:block mb-4 text-heading-xs text-gray-100">
-                Compartilhar
-              </h2>
-
-              <div className="flex justify-between md:flex-col gap-2">
-                {shareButtons.map((provider) => (
-                  <Button
-                    variant="outline"
-                    key={provider.provider}
-                    onClick={() => provider.action()}
-                    className=" w-fit md:w-full justify-start gap-2"
-                  >
-                    {provider.icon}
-                    <span className="hidden md:block">{provider.name}</span>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </aside>
+          <PostShare
+            url={postUrl}
+            title={post?.title}
+            description={post?.description}
+          />
         </div>
       </div>
     </main>
