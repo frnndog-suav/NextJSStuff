@@ -28,12 +28,14 @@ const SAMPLE_APPOINTMENTS = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // const teste = await prisma.appointment.findMany();
+
   const periods = groupAppointmentsByPeriod(SAMPLE_APPOINTMENTS);
 
   return (
     <div className="bg-background-primary p-6">
-      <div className="flex items-center justify-between md:m-8">
+      <div className="flex items-center justify-between md:mb-8">
         <div>
           <h1 className="text-title-size text-content-primary mb-2">
             Sua Agenda
