@@ -1,5 +1,6 @@
 import { AppointmentForm } from '@/components/appointment-form';
 import { PeriodSection } from '@/components/ui/period-section';
+import { prisma } from '@/lib/prisma';
 import { groupAppointmentsByPeriod } from '@/utils/appointment';
 
 const SAMPLE_APPOINTMENTS = [
@@ -30,7 +31,9 @@ const SAMPLE_APPOINTMENTS = [
 ];
 
 export default async function Home() {
-  // const teste = await prisma.appointment.findMany();
+  const teste = await prisma.appointment.findMany();
+
+  console.log('AGENDAMENTOS', teste);
 
   const periods = groupAppointmentsByPeriod(SAMPLE_APPOINTMENTS);
 
