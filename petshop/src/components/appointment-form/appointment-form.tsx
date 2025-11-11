@@ -21,6 +21,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import { TAppointment } from '@/type/appointment';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format, setHours, setMinutes, startOfToday } from 'date-fns';
 import {
@@ -32,7 +33,7 @@ import {
   Phone,
   User,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IMaskInput } from 'react-imask';
 import { toast } from 'sonner';
@@ -79,7 +80,12 @@ const appointmentFormSchema = z
 
 type AppointFormValues = z.infer<typeof appointmentFormSchema>;
 
-export const AppointmentForm = () => {
+type TProps = {
+  appointment?: TAppointment;
+  children?: React.ReactNode;
+};
+
+export const AppointmentForm = ({ appointment, children }: TProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const form = useForm<AppointFormValues>({
@@ -117,11 +123,13 @@ export const AppointmentForm = () => {
     form.reset();
   }
 
+  useEffect(() => {
+    form.reset(appointment);
+  }, [appointment, form]);
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="brand">Novo Agendamento</Button>
-      </DialogTrigger>
+      {children && <DialogTrigger asChild>{children}</DialogTrigger>}
 
       <DialogContent
         variant="appointment"
