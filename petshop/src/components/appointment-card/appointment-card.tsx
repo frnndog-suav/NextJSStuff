@@ -1,12 +1,22 @@
+import { cn } from '@/lib/utils';
 import { TAppointment } from '@/type/appointment';
 
 type TProps = {
   appointment: TAppointment;
+  isFirstInSection?: boolean;
 };
 
-export function AppointmentCard({ appointment }: TProps) {
+export function AppointmentCard({
+  appointment,
+  isFirstInSection = false,
+}: TProps) {
   return (
-    <div>
+    <div
+      className={cn(
+        'grid grid-cols-2 md:grid-cols-[15%_35%_30%_20%] items-center py-3',
+        !isFirstInSection && 'border-t border-border-divisor'
+      )}
+    >
       <div className="text-left pr-4 md:pr-0">
         <span className="text-label-small text-content-primary font-semibold">
           {appointment.time}
