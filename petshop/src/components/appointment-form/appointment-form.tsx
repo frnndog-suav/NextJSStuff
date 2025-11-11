@@ -1,9 +1,26 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
-import { SelectTrigger } from '@radix-ui/react-select';
 import { format, setHours, setMinutes, startOfToday } from 'date-fns';
 import {
   CalendarIcon,
@@ -16,95 +33,91 @@ import {
 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { IMaskInput } from 'react-imask';
+import { toast } from 'sonner';
 import z from 'zod';
-import { Button } from '../ui/button';
 import { Calendar } from '../ui/calendar';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from '../ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Select, SelectContent, SelectItem, SelectValue } from '../ui/select';
-import { Textarea } from '../ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 
 const appointmentFormSchema = z
   .object({
-    tutorName: z.string().min(3, 'O nome do tutor é obrigatório.'),
-    petName: z.string().min(3, 'O nome do pet é obrigatório.'),
-    phone: z.string().min(11, 'O telefone é obrigatório.'),
-    description: z.string().optional(),
+    tutorName: z.string().min(3, 'O nome do tutor é obrigatório'),
+    petName: z.string().min(3, 'O nome do pet é obrigatório'),
+    phone: z.string().min(11, 'O telefone é obrigatório'),
+    description: z.string().min(3, 'A descrição é obrigatória'),
     scheduleAt: z
       .date({
-        error: 'A data é obrigatória.',
+        error: 'A data é obrigatória',
       })
       .min(startOfToday(), {
-        message: 'A data deve ser no futuro.',
+        message: 'A data não pode ser no passado',
       }),
-    time: z.string().min(1, 'A hora é obrigatória.'),
+    time: z.string().min(1, 'A hora é obrigatória'),
   })
   .refine(
     (data) => {
       const [hour, minute] = data.time.split(':');
-
       const scheduleDateTime = setMinutes(
         setHours(data.scheduleAt, Number(hour)),
         Number(minute)
       );
-
       return scheduleDateTime > new Date();
     },
     {
       path: ['time'],
-      error: 'O horário não pode ser no passado.',
+      error: 'O horário não pode ser no passado',
     }
   );
 
-type TAppointmentFormValues = z.infer<typeof appointmentFormSchema>;
+type AppointFormValues = z.infer<typeof appointmentFormSchema>;
 
-export function AppointmentForm() {
-  const form = useForm<TAppointmentFormValues>({
+export const AppointmentForm = () => {
+  const form = useForm<AppointFormValues>({
     resolver: zodResolver(appointmentFormSchema),
     defaultValues: {
-      time: '',
-      phone: '',
-      petName: '',
       tutorName: '',
+      petName: '',
+      phone: '',
       description: '',
       scheduleAt: undefined,
+      time: '',
     },
   });
 
-  function onSubmit(data: TAppointmentFormValues) {
+  const onSubmit = (data: AppointFormValues) => {
+    const [hour, minute] = data.time.split(':');
+
+    const scheduleAt = new Date(data.scheduleAt);
+    scheduleAt.setHours(Number(hour), Number(minute), 0, 0);
+
+    toast.success(`Agendamento criado com sucesso!`);
+
+    // invoca nossa SERVER ACTION
+
     console.log(data);
-  }
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="brand">Novo agendamento</Button>
+        <Button variant="brand">Novo Agendamento</Button>
       </DialogTrigger>
 
       <DialogContent
         variant="appointment"
         overlayVariant="blurred"
-        showCloseButton={true}
+        showCloseButton
       >
         <DialogHeader>
-          <DialogTitle>Agende um atendimento</DialogTitle>
-
-          <DialogDescription>
-            Digite os dados do cliente para realizar o agendamento.
+          <DialogTitle size="modal">Agende um atendimento</DialogTitle>
+          <DialogDescription size="modal">
+            Preencha os dados do cliente para realizar o agendamento:
           </DialogDescription>
         </DialogHeader>
 
@@ -113,7 +126,7 @@ export function AppointmentForm() {
             <FormField
               control={form.control}
               name="tutorName"
-              render={({ ...field }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-label-medium-size text-content-primary">
                     Nome do tutor
@@ -139,7 +152,7 @@ export function AppointmentForm() {
             <FormField
               control={form.control}
               name="petName"
-              render={({ ...field }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-label-medium-size text-content-primary">
                     Nome do pet
@@ -165,7 +178,7 @@ export function AppointmentForm() {
             <FormField
               control={form.control}
               name="phone"
-              render={({ ...field }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-label-medium-size text-content-primary">
                     Telefone
@@ -192,7 +205,7 @@ export function AppointmentForm() {
             <FormField
               control={form.control}
               name="description"
-              render={({ ...field }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-label-medium-size text-content-primary">
                     Descrição do serviço
@@ -294,12 +307,11 @@ export function AppointmentForm() {
             <div className="flex justify-end">
               <Button
                 type="submit"
-                className="w-full mt-2"
                 variant="brand"
                 disabled={form.formState.isSubmitting}
               >
                 {form.formState.isSubmitting && (
-                  <Loader2 className="mr-2 h-4 animate-spin" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 Agendar
               </Button>
@@ -309,23 +321,20 @@ export function AppointmentForm() {
       </DialogContent>
     </Dialog>
   );
-}
+};
 
-function generateTimeOptions() {
+const generateTimeOptions = (): string[] => {
   const times = [];
 
-  for (let hour = 9; hour < 21; hour++) {
+  for (let hour = 9; hour <= 21; hour++) {
     for (let minute = 0; minute < 60; minute += 30) {
-      if (hour === 21 && minute > 0) {
-        break;
-      }
-
+      if (hour === 21 && minute > 0) break;
       const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
       times.push(timeString);
     }
   }
 
   return times;
-}
+};
 
 const TIME_OPTIONS = generateTimeOptions();

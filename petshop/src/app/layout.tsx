@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../styles/globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
+import '../styles/globals.css';
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400","500" , "700"],
+  variable: '--font-inter',
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
 });
 
 const interTight = Inter({
-  variable: "--font-inter-tight",
-  subsets: ["latin"],
-  weight: [ "700"],
+  variable: '--font-inter-tight',
+  subsets: ['latin'],
+  weight: ['700'],
 });
 
 export const metadata: Metadata = {
-  title: "Mundo Pet",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  title: 'Mundo Pet',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 };
 
 export default function RootLayout({
@@ -26,10 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body
-        className={`${inter.variable} ${interTight.variable}  antialiased`}
-      >
+      <body className={`${inter.variable} ${interTight.variable}  antialiased`}>
         {children}
+        <Toaster position='top-right' />
       </body>
     </html>
   );
