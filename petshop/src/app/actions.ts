@@ -46,10 +46,15 @@ export async function createAppointment(data: AppointmentData) {
 
     await prisma.appointment.create({
       data: {
-        ...parsedData,
+        tutorName: parsedData.tutorName,
+        petName: parsedData.petName,
+        phone: parsedData.phone,
+        description: parsedData.description,
         scheduledAt: scheduleAt,
       },
     });
+
+    console.log('ADD REGISTRO');
   } catch (error) {
     console.log('E R R O R 👎', error);
   }

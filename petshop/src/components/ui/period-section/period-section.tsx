@@ -42,9 +42,9 @@ export function PeriodSection({ period }: TPeriodSectionsProps) {
           </div>
         </div>
       ) : (
-        <div>
-          <p>Nenhum agendamento para este período</p>
-        </div>
+        <p className="text-paragraph-small-size text-content-secondary p-5">
+          Nenhum agendamento para este período
+        </p>
       )}
     </section>
   );
