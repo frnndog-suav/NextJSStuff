@@ -1,3 +1,4 @@
+import { AppointmentForm } from '@/components/appointment-form';
 import { PeriodSection } from '@/components/ui/period-section';
 import { groupAppointmentsByPeriod } from '@/utils/appointment';
 
@@ -50,6 +51,10 @@ export default async function Home() {
             <PeriodSection key={key} period={period} />
           ))}
         </div>
+      </div>
+
+      <div>
+        <AppointmentForm />
       </div>
     </div>
   );
