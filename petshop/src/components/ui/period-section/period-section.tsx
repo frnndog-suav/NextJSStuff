@@ -1,3 +1,4 @@
+import { AppointmentCard } from '@/components/appointment-card';
 import { TAppointmentByPeriod } from '@/type/appointment';
 import { Cloudy, Moon, Sun } from 'lucide-react';
 
@@ -37,7 +38,7 @@ export function PeriodSection({ period }: TPeriodSectionsProps) {
             </div>
 
             {period.appointments.map((appointment, index) => (
-              <div key={index}>{appointment.petName}</div>
+              <AppointmentCard key={index} appointment={appointment} />
             ))}
           </div>
         </div>
