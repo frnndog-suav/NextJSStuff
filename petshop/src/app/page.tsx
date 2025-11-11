@@ -1,36 +1,11 @@
 import { AppointmentForm } from '@/components/appointment-form';
 import { PeriodSection } from '@/components/ui/period-section';
+import { prisma } from '@/lib/prisma';
 import { groupAppointmentsByPeriod } from '@/utils/appointment';
 
-const SAMPLE_APPOINTMENTS = [
-  {
-    id: '1',
-    petName: 'Rex',
-    phone: '1234567890',
-    tutorName: 'João Silva',
-    description: 'Consulta de rotina',
-    scheduledAt: new Date('2025-08-17T10:00:00'),
-  },
-  {
-    id: '2',
-    petName: 'Tobias',
-    phone: '1234567890',
-    tutorName: 'Maria Silva',
-    scheduledAt: new Date('2025-08-20T15:00:00'),
-    description: 'Cirurgia',
-  },
-  {
-    id: '3',
-    petName: 'Tebas',
-    phone: '1234567890',
-    tutorName: 'Carlos Silva',
-    scheduledAt: new Date('2025-08-28T19:00:00'),
-    description: 'Vacinação',
-  },
-];
-
 export default async function Home() {
-  const periods = groupAppointmentsByPeriod(SAMPLE_APPOINTMENTS);
+  const appointments = await prisma.appointment.findMany();
+  const periods = groupAppointmentsByPeriod(appointments);
 
   return (
     <div className="bg-background-primary p-6">
