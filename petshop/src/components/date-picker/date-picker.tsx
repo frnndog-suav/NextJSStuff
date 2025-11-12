@@ -1,13 +1,14 @@
 'use client';
 
+import { addDays, format, isValid } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { Calendar, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { Calendar as CustomCalendar } from '../ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
-import { addDays, format, isValid } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import { NavigationButton } from './navigation-button';
 
 export const DatePicker = () => {
   const router = useRouter();
@@ -57,9 +58,12 @@ export const DatePicker = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Button variant="outline" onClick={() => handleNavigateDay(-1)}>
+      <NavigationButton
+        tooltipText="Dia anterior"
+        onClick={() => handleNavigateDay(-1)}
+      >
         <ChevronLeft className="h-4 w-4" />
-      </Button>
+      </NavigationButton>
 
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>
@@ -78,7 +82,7 @@ export const DatePicker = () => {
             <ChevronDown className="h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent className="w-auto p-0">
           <CustomCalendar
             mode="single"
             selected={date}
@@ -89,9 +93,12 @@ export const DatePicker = () => {
         </PopoverContent>
       </Popover>
 
-      <Button variant="outline" onClick={() => handleNavigateDay(1)}>
+      <NavigationButton
+        tooltipText="Próximo dia"
+        onClick={() => handleNavigateDay(-1)}
+      >
         <ChevronRight className="h-4 w-4" />
-      </Button>
+      </NavigationButton>
     </div>
   );
 };
