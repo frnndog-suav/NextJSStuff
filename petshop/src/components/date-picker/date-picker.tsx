@@ -2,7 +2,8 @@
 
 import { Calendar, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
-import { Popover, PopoverTrigger } from '../ui/popover';
+import { Calendar as CustomCalendar } from '../ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { addDays, format, isValid } from 'date-fns';
@@ -41,6 +42,11 @@ export const DatePicker = () => {
     updateURLWithDate(newDate);
   };
 
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    updateURLWithDate(selectedDate);
+    setIsPopoverOpen(false);
+  };
+
   useEffect(() => {
     const newDate = getInitialDate();
 
@@ -72,6 +78,15 @@ export const DatePicker = () => {
             <ChevronDown className="h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
+        <PopoverContent>
+          <CustomCalendar
+            mode="single"
+            selected={date}
+            autoFocus
+            locale={ptBR}
+            onSelect={handleDateSelect}
+          />
+        </PopoverContent>
       </Popover>
 
       <Button variant="outline" onClick={() => handleNavigateDay(1)}>
