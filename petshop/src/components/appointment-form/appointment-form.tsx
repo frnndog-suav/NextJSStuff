@@ -1,6 +1,6 @@
 'use client';
 
-import { createAppointment } from '@/app/actions';
+import { createAppointment, updateAppointment } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -106,25 +106,43 @@ export const AppointmentForm = ({ appointment, children }: TProps) => {
     const scheduleAt = new Date(data.scheduleAt);
     scheduleAt.setHours(Number(hour), Number(minute), 0, 0);
 
-    const result = await createAppointment({
-      ...data,
-      scheduleAt,
-    });
+    const isUpdate = !!appointment?.id;
 
-    if (result.error) {
-      toast.error(result.error);
-      return;
+    if (isUpdate) {
+      const result = await updateAppointment(appointment!.id, {
+        ...data,
+        scheduleAt,
+      });
+
+      if (result?.error) {
+        toast.error(result.error);
+        return;
+      }
+
+      toast.success(`Agendamento atualizado com sucesso!`);
+      setIsOpen(false);
+
+      form.reset();
+    } else {
+      const result = await createAppointment({
+        ...data,
+        scheduleAt,
+      });
+
+      if (result?.error) {
+        toast.error(result.error);
+        return;
+      }
+
+      toast.success(`Agendamento criado com sucesso!`);
+      setIsOpen(false);
+
+      form.reset();
     }
-
-    toast.success(`Agendamento criado com sucesso!`);
-
-    setIsOpen(false);
-
-    form.reset();
   }
 
   useEffect(() => {
-    form.reset(appointment);
+    form.reset({ ...appointment, scheduleAt: appointment?.scheduledAt });
   }, [appointment, form]);
 
   return (
